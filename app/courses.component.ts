@@ -23,7 +23,7 @@ export class CoursesComponent {
 
 		this.courses = this.courseService.getCourses();
 
-		this.socket = new WebSocket('ws://localhost:8888/bic/con');
+		this.socket = new WebSocket('ws://localhost:8080/bic/con');
 		this.socket.onmessage = function (ev) {
 			var data = JSON.parse(ev.data);
 			this.author = data['name'];
