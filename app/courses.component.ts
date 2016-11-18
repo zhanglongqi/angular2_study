@@ -10,7 +10,19 @@ import {CourseService} from './course.service'
 								<strong>{{ course }}</strong>
 							</li>
 						</ul>
-						You just moved over <input type="text" [(ngModel)]="overItem">
+						<div class="input-group col-xs-8">
+						You just clicked/moved over <input type="text" [(ngModel)]="overItem">
+						</div>
+						<br>
+						
+						<div class="input-group col-xs-8">
+                <input #newItem required type="text" class="form-control"
+                    placeholder="new course...">
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary"
+                        (click)="onAddItem(newItem)">Add</button>
+                </span>
+            </div>
 `,
 	providers: [CourseService]
 })
@@ -23,6 +35,12 @@ export class CoursesComponent {
 
 	itemHovered(course) {
 		this.overItem = course;
+	}
+
+	onAddItem(listItem) {
+		if (listItem.value == '') return;
+		this.courses.push(listItem.value);
+		listItem.value = '';
 	}
 
 	constructor(private courseService: CourseService) {
