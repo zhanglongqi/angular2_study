@@ -6,10 +6,11 @@ import {CourseService} from './course.service'
 	template: `<h2>{{title}}</h2>
 						{{author}}
 						<ul>
-							<li *ngFor="let course of courses">
+							<li *ngFor="let course of courses" (mouseover)="itemHovered(course)">
 								<strong>{{ course }}</strong>
 							</li>
 						</ul>
+						You just moved over <input type="text" [(ngModel)]="overItem">
 `,
 	providers: [CourseService]
 })
@@ -18,6 +19,11 @@ export class CoursesComponent {
 	courses = [];
 	author: string;
 	socket;
+	public overItem = '';
+
+	itemHovered(course) {
+		this.overItem = course;
+	}
 
 	constructor(private courseService: CourseService) {
 
